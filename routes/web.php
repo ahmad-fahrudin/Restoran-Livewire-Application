@@ -1,8 +1,21 @@
 <?php
 
+use App\Http\Livewire\Admin\Login;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Admin\Dashboard;
 
 Route::view('/', 'welcome');
+Route::get('admin/login', Login::class)->name('admin.login');
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/login', Login::class)->name('admin.login');
+
+    Route::middleware(['auth:admin'])->group(function () {
+        Route::get('/dashboard', Dashboard::class)->name('admin.dashboard');
+    });
+});
+
+
+
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
@@ -12,4 +25,4 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
