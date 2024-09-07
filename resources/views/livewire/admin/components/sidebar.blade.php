@@ -58,6 +58,12 @@
                                 <span>Category</span>
                             </a>
                         </li>
+                        <li class="sidebar-item">
+                            <a href="{{ route('all.foods') }}" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Foods</span>
+                            </a>
+                        </li>
                         <button wire:click="logout" class="btn btn-danger ms-3 px-5 mt-2"
                             onclick="return confirm('Anda yakin keluar dari aplikasi?')">
                             Logout

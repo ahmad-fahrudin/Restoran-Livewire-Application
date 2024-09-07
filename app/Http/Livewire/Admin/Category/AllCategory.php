@@ -2,18 +2,16 @@
 
 namespace App\Http\Livewire\Admin\Category;
 
-use App\Models\Category;
 use Livewire\Component;
+use App\Models\Category;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AllCategory extends Component
 {
-    public $category;
-    public function mount()
-    {
-        $this->category = Category::all();
-    }
     public function render()
     {
-        return view('livewire.admin.category.all-category')->layout('layouts.admin.app');
+        return view('livewire.admin.category.all-category', [
+            'category' => Category::all(),
+        ])->layout('layouts.admin.app');
     }
 }
