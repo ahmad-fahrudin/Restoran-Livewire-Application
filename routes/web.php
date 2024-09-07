@@ -19,7 +19,6 @@ Route::group(['prefix' => 'admin'], function () {
 
         // Foods
         Route::get('/all-foods', AllFoods::class)->name('all.foods');
-        Route::get('/create-foods', CreateFoods::class)->name('create.foods');
     });
 });
 
