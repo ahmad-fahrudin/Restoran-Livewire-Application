@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\Auth;
 
 class Login extends Component
 {
-    public $login; // Ini bisa berupa email atau name
+    public $email;
     public $password;
     public $remember = false;
 
     protected $rules = [
-        'login' => 'required', // Bisa berupa email atau name
+        'email' => 'required|email',
         'password' => 'required',
     ];
 
@@ -20,13 +20,9 @@ class Login extends Component
     {
         $this->validate();
 
-        // Cek apakah login berupa email atau name
-        $credentials = filter_var($this->login, FILTER_VALIDATE_EMAIL)
-            ? ['email' => $this->login, 'password' => $this->password]
-            : ['name' => $this->login, 'password' => $this->password];
-
-        if (Auth::guard('admin')->attempt($credentials, $this->remember)) {
-            // Redirect to admin dashboard
+        if (Auth::guard('admin')->attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
+            // Redirect to admin dashboard or any protected route
+            toast('Login Successfully', 'success')->timerProgressBar();
             return redirect()->route('admin.dashboard');
         } else {
             session()->flash('error', 'Ada yang salah dengan data yan di inputkan');

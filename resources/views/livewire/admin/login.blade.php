@@ -6,11 +6,13 @@
                         <a href="#"><img src="{{ asset('./assets/compiled/svg/logo.svg') }}" alt="Logo" /></a>
                     </div>
                     <h1 class="auth-title">Log in.</h1>
-
+                    @if (session()->has('error'))
+                        <div class="text-danger">{{ session('error') }}</div>
+                    @endif
                     <form wire:submit.prevent="login">
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" class="form-control form-control-xl" wire:model="login" id="login"
-                                placeholder="Name/Email" />
+                            <input type="text" class="form-control form-control-xl" wire:model="email" id="email"
+                                placeholder="Email" />
                             <div class="form-control-icon">
                                 <i class="bi bi-person"></i>
                             </div>
