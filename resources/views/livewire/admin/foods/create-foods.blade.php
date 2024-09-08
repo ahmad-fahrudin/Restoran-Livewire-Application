@@ -56,7 +56,7 @@
                         @enderror
                     </div>
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="name">Image</label>
                                 <input type="file" name="image" id="image" wire:model.lazy="image"
@@ -67,6 +67,12 @@
                             </div>
                         </div>
                         <div class="col-md-4">
+                            <div class="form-group">
+                                <img src="{{ url('no_image.jpg') }}" style="width: 100px"
+                                    class="rounded-circle avatar-lg img-thumbnail" alt="profile-image" id="showImage">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label for="nik">Price</label>
                                 <input type="number" wire:model.lazy="price" name="price" id="price"

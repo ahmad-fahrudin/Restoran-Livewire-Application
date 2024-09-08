@@ -30,7 +30,8 @@
                                     <td>Rp.{{ number_format($item->price, 0, ',', '.') }}</td>
                                     <td>
                                         <a href="" class="btn btn-warning text-center">edit</a>
-                                        <a href="" onclick="return confirm('Anda yakin Menghapus data?')"
+                                        <a wire:click="delete({{ $item->id }})"
+                                            onclick="return confirm('Anda yakin Menghapus data?')"
                                             class="btn
                                             btn-danger text-center">delete</a>
                                     </td>

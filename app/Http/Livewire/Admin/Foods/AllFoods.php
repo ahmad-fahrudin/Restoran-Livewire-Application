@@ -6,6 +6,7 @@ use App\Models\Foods;
 use Livewire\Component;
 use App\Models\Category;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 
 class AllFoods extends Component
 {
@@ -36,11 +37,11 @@ class AllFoods extends Component
             'category_id' => 'required|exists:categories,id',
             'price' => 'required|numeric',
             'description' => 'nullable|string',
-            'image' => 'nullable|image|max:1024', // validasi file gambar
+            'image' => 'nullable', // validasi file gambar
         ]);
 
         if ($this->image) {
-            $imagePath = $this->image->store('products', 'public');
+            $imagePath = $this->image->store('foods', 'public');
         }
 
         Foods::create([
@@ -56,8 +57,22 @@ class AllFoods extends Component
         $this->description = null;
         $this->image = null;
 
-        toast('Berhasil menambahkan data!', 'success')->timerProgressBar();
+        session()->flash('message', 'Room Deleted Successfully.');
         $this->_page = "index";
+    }
+    public function delete($id)
+    {
+        $food = Foods::findOrFail($id);
+
+        // Hapus gambar jika ada
+        if ($food->image) {
+            Storage::disk('public')->delete($food->image);
+        }
+
+        // Hapus data dari database
+        $food->delete();
+
+        session()->flash('message', 'Room Deleted Successfully.');
     }
     public function render()
     {
