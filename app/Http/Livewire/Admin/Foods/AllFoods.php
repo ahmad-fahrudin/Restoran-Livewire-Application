@@ -6,7 +6,9 @@ use App\Models\Foods;
 use Livewire\Component;
 use App\Models\Category;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Laravel\Facades\Image;
 
 class AllFoods extends Component
 {
@@ -37,11 +39,22 @@ class AllFoods extends Component
             'category_id' => 'required|exists:categories,id',
             'price' => 'required|numeric',
             'description' => 'nullable|string',
-            'image' => 'nullable', // validasi file gambar
+            'image' => 'nullable|image|max:2048', // validasi file gambar
         ]);
 
         if ($this->image) {
-            $imagePath = $this->image->store('foods', 'public');
+            // Resize gambar menggunakan Intervention Image
+            $image = Image::read($this->image->getRealPath());
+            $image->resize(300, 300, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+
+            // Simpan gambar yang sudah di-resize
+            $imageName = time() . '.' . $this->image->getClientOriginalExtension();
+            $image->save(public_path('upload/foods/' . $imageName));
+
+            $imagePath = 'upload/foods/' . $imageName;
         }
 
         Foods::create([
@@ -51,13 +64,8 @@ class AllFoods extends Component
             'description' => $this->description,
             'image' => $imagePath ?? null,
         ]);
-        $this->name = null;
-        $this->category_id = null;
-        $this->price = null;
-        $this->description = null;
-        $this->image = null;
 
-        session()->flash('message', 'Room Deleted Successfully.');
+        session()->flash('message', 'Food added successfully.');
         $this->_page = "index";
     }
     public function delete($id)
@@ -66,7 +74,7 @@ class AllFoods extends Component
 
         // Hapus gambar jika ada
         if ($food->image) {
-            Storage::disk('public')->delete($food->image);
+            File::delete(public_path($food->image));
         }
 
         // Hapus data dari database

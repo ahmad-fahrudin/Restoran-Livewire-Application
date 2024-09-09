@@ -12,7 +12,7 @@
                     <table class="table table-hover table-striped" id="table1">
                         <thead>
                             <tr>
-                                <th style="width: 10px">No.</th>
+                                <th style="width: 50px">No.</th>
                                 <th>Image</th>
                                 <th>Name</th>
                                 <th>Price</th>
@@ -23,8 +23,8 @@
                             @foreach ($foods as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td><img src="{{ asset('storage/' . $item->image) }}" alt=""
-                                            style="width: 50px; height:40px;">
+                                    <td><img src="{{ asset($item->image) }}" alt=""
+                                            style="width: 50px; height:50px;">
                                     </td>
                                     <td>{{ $item->name }}</td>
                                     <td>Rp.{{ number_format($item->price, 0, ',', '.') }}</td>
