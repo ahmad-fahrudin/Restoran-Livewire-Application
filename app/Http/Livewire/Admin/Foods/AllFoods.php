@@ -20,6 +20,7 @@ class AllFoods extends Component
     public $image;
     public $stock;
     public $_page;
+    public $edit_foods_id;
     public function mount()
     {
         $this->_page = 'index';
@@ -32,42 +33,108 @@ class AllFoods extends Component
     {
         $this->_page = "create";
     }
+    public function show_edit_form($id)
+    {
+        $this->_page = "edit";
+        $this->edit_foods_id = $id;
+        $item = Foods::findOrFail($id);
+        $this->name = $item->name;
+        $this->category_id = $item->category_id;
+        $this->price = $item->price;
+        $this->description = $item->description;
+        $this->image = $item->image;
+    }
     public function add_foods()
     {
-        $this->validate([
-            'name' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id',
-            'price' => 'required|numeric',
-            'description' => 'nullable|string',
-            'image' => 'nullable|image|max:2048', // validasi file gambar
-        ]);
+        // Jika ada edit_foods_id maka update
+        if ($this->edit_foods_id) {
+            $this->validate([
+                'name' => 'required|string|max:255',
+                'category_id' => 'required|exists:categories,id',
+                'price' => 'required|numeric',
+                'description' => 'nullable|string',
+                'image' => 'nullable|image|max:2048', // validasi file gambar
+            ]);
 
-        if ($this->image) {
-            // Resize gambar menggunakan Intervention Image
-            $image = Image::read($this->image->getRealPath());
-            $image->resize(300, 300, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            });
+            $food = Foods::findOrFail($this->edit_foods_id);
 
-            // Simpan gambar yang sudah di-resize
-            $imageName = time() . '.' . $this->image->getClientOriginalExtension();
-            $image->save(public_path('upload/foods/' . $imageName));
+            // Jika ada gambar baru yang diunggah
+            if ($this->image && is_object($this->image)) {
+                // Hapus gambar lama jika ada
+                if ($food->image && File::exists(public_path($food->image))) {
+                    File::delete(public_path($food->image));
+                }
 
-            $imagePath = 'upload/foods/' . $imageName;
+                // Resize dan simpan gambar baru
+                $image = Image::read($this->image->getRealPath());
+                $image->resize(300, 300, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+
+                $imageName = time() . '.' . $this->image->getClientOriginalExtension();
+                $image->save(public_path('upload/foods/' . $imageName));
+
+                $food->image = 'upload/foods/' . $imageName;
+            }
+
+            // Update data
+            $food->name = $this->name;
+            $food->category_id = $this->category_id;
+            $food->price = $this->price;
+            $food->description = $this->description;
+            $food->save();
+
+            session()->flash('message', 'Food updated successfully.');
+            $this->_page = "index";
+        } else {
+            // Jika tidak ada edit_foods_id maka lakukan create seperti biasa
+            $this->validate([
+                'name' => 'required|string|max:255',
+                'category_id' => 'required|exists:categories,id',
+                'price' => 'required|numeric',
+                'description' => 'nullable|string',
+                'image' => 'nullable|image|max:2048', // validasi file gambar
+            ]);
+
+            if ($this->image) {
+                // Resize gambar menggunakan Intervention Image
+                $image = Image::read($this->image->getRealPath());
+                $image->resize(300, 300, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+
+                $imageName = time() . '.' . $this->image->getClientOriginalExtension();
+                $image->save(public_path('upload/foods/' . $imageName));
+
+                $imagePath = 'upload/foods/' . $imageName;
+            }
+
+            Foods::create([
+                'name' => $this->name,
+                'category_id' => $this->category_id,
+                'price' => $this->price,
+                'description' => $this->description,
+                'image' => $imagePath ?? null,
+            ]);
+
+            session()->flash('message', 'Data berhasil disimpan!');
+            $this->_page = "index";
         }
-
-        Foods::create([
-            'name' => $this->name,
-            'category_id' => $this->category_id,
-            'price' => $this->price,
-            'description' => $this->description,
-            'image' => $imagePath ?? null,
-        ]);
-
-        session()->flash('message', 'Food added successfully.');
-        $this->_page = "index";
     }
+    public function edit($id)
+    {
+        $item = Foods::findOrFail($id);
+        $this->edit_foods_id = $id;
+        $this->name = $item->name;
+        $this->category_id = $item->category_id;
+        $this->price = $item->price;
+        $this->description = $item->description;
+        $this->image = $item->image;
+        $this->_page = "edit";
+    }
+
     public function delete($id)
     {
         $food = Foods::findOrFail($id);
@@ -80,7 +147,7 @@ class AllFoods extends Component
         // Hapus data dari database
         $food->delete();
 
-        session()->flash('message', 'Room Deleted Successfully.');
+        session()->flash('message', 'Data berhasil disimpan!');
     }
     public function render()
     {
@@ -90,6 +157,11 @@ class AllFoods extends Component
             return view('livewire.admin.foods.all-foods', compact('foods'))->layout('layouts.admin.app');
         } else if ($this->_page == 'create') {
             return view('livewire.admin.foods.create-foods', compact('category'))->layout('layouts.admin.app');
+        } else if ($this->_page == "edit") {
+            return view('livewire.admin.foods.edit-foods', [
+                'foods' => Foods::findOrFail($this->edit_foods_id),
+                'category' => Category::all(),
+            ]);
         }
     }
 }

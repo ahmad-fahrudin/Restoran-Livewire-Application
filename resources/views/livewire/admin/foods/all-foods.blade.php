@@ -4,6 +4,10 @@
     </div>
     <section class="section">
         <div class="card">
+            <div wire:loading wire:target="show_create_form">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Loading...
+            </div>
             <div class="card-header">
                 <a wire:click="show_create_form" class="btn btn-primary">Tambah Baru</a>
             </div>
@@ -16,7 +20,7 @@
                                 <th>Image</th>
                                 <th>Name</th>
                                 <th>Price</th>
-                                <th style="width: 200px">Opsi</th>
+                                <th style="width: 300px">Opsi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -29,7 +33,8 @@
                                     <td>{{ $item->name }}</td>
                                     <td>Rp.{{ number_format($item->price, 0, ',', '.') }}</td>
                                     <td>
-                                        <a href="" class="btn btn-warning text-center">edit</a>
+                                        <a wire:click="edit({{ $item->id }})"
+                                            class="btn btn-warning text-center">edit</a>
                                         <a wire:click="delete({{ $item->id }})"
                                             onclick="return confirm('Anda yakin Menghapus data?')"
                                             class="btn

@@ -6,17 +6,9 @@
         <div class="card">
             <div class="card-header">
                 <a wire:click="show_index" class="btn btn-secondary">Kembali</a>
-                @if (session()->has('message'))
-                    <div class="alert alert-success">
-                        {{ session('message') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                @endif
             </div>
             <div class="card-body">
-                <form wire:submit.prevent="add_foods()">
+                <form wire:submit.prevent="add_foods()" enctype="multipart/form-data">
                     <div class="row">
 
                         <div class="col-md-8">
@@ -58,25 +50,37 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="name">Image</label>
+                                <label for="image">Image</label>
                                 <input type="file" name="image" id="image" wire:model.lazy="image"
                                     class="form-control">
                                 @error('image')
                                     <span class="text-red-500 text-danger text-xs">{{ $message }}</span>
                                 @enderror
+                                <div wire:loading wire:target="image" class="text-info">
+                                    Uploading...
+                                </div>
                             </div>
                         </div>
+
                         <div class="col-md-4">
                             <div class="form-group">
-                                <img src="{{ url('no_image.jpg') }}" style="width: 100px"
-                                    class="rounded-circle avatar-lg img-thumbnail" alt="profile-image" id="showImage">
+                                @if ($image)
+                                    <img src="{{ $image->temporaryUrl() }}" style="width: 150px"
+                                        class="rounded-circle avatar-lg img-thumbnail" alt="profile-image"
+                                        id="showImage">
+                                @else
+                                    <img src="{{ url('no_image.jpg') }}" style="width: 100px"
+                                        class="rounded-circle avatar-lg img-thumbnail" alt="profile-image"
+                                        id="showImage">
+                                @endif
                             </div>
                         </div>
+
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label for="nik">Price</label>
+                                <label for="price">Price</label>
                                 <input type="number" wire:model.lazy="price" name="price" id="price"
-                                    class="form-control" data-parsley-type="number" placeholder="0">
+                                    class="form-control" placeholder="0">
                                 @error('price')
                                     <span class="text-red-500 text-danger text-xs">{{ $message }}</span>
                                 @enderror
