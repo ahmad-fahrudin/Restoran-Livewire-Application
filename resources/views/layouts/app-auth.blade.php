@@ -49,7 +49,7 @@
     <div id="app">
         @livewire('components.header')
         <main class="py-4">
-            {{ $slot }}
+            @yield('content')
         </main>
     </div>
     @livewire('components.footer')

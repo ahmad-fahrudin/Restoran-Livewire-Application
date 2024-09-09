@@ -15,13 +15,12 @@
                         <a href="" class="nav-item nav-link">Menu</a>
                         <a href="{{ route('contact') }}" class="nav-item nav-link">Contact</a>
                         <ul class="navbar-nav ms-auto">
-
                             @guest
                                 @if (Route::has('login'))
-                                    <a href="" class="nav-item nav-link">Login</a>
+                                    <a href="{{ route('login') }}" class="nav-item nav-link">Login</a>
                                 @endif
                                 @if (Route::has('register'))
-                                    <a href="" class="nav-item nav-link">Register</a>
+                                    <a href="{{ route('register') }}" class="nav-item nav-link">Register</a>
                                 @endif
                             @else
                                 <a href="" class="nav-item nav-link"><i
@@ -42,13 +41,14 @@
                                         <a class="dropdown-item" href="">
                                             My Orders
                                         </a>
-                                        <a class="dropdown-item" href=""
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
                                             {{ __('Logout') }}
                                         </a>
 
-                                        <form id="logout-form" action="" method="POST" class="d-none">
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            class="d-none">
                                             @csrf
                                         </form>
                                     </div>

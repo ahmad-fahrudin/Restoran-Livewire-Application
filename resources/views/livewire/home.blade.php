@@ -330,6 +330,11 @@
                                         <option value="1">People 1</option>
                                         <option value="2">People 2</option>
                                         <option value="3">People 3</option>
+                                        <option value="3">People 4</option>
+                                        <option value="3">People 5</option>
+                                        <option value="3">People 10</option>
+                                        <option value="3">People 15</option>
+                                        <option value="3">People 20</option>
                                     </select>
                                     @error('num_people')
                                         <span class="invalid-feedback" role="alert">

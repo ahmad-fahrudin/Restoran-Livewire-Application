@@ -34,7 +34,3 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/booking', Booking::class)->name('booking');
     });
 });
-
-
-
-require __DIR__ . '/auth.php';
