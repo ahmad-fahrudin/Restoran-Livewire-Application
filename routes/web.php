@@ -1,17 +1,22 @@
 <?php
 
-use App\Http\Livewire\About;
-use App\Http\Livewire\Admin\Booking\Booking;
-use App\Http\Livewire\Admin\Category\AllCategory;
-use App\Http\Livewire\Admin\Login;
 use App\Http\Livewire\Home;
-use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\Admin\Dashboard;
-use App\Http\Livewire\Admin\Foods\AllFoods;
-use App\Http\Livewire\Admin\Order\Order;
+use App\Http\Livewire\About;
 use App\Http\Livewire\Contact;
 use App\Http\Livewire\Service;
+use App\Http\Livewire\Admin\Login;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Admin\Dashboard;
+use App\Http\Livewire\Admin\Order\Order;
+use App\Http\Livewire\Admin\Foods\AllFoods;
+use App\Http\Livewire\Admin\Booking\Booking;
+use App\Http\Livewire\Admin\Category\AllCategory;
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', Home::class)->name('home');
 Route::get('/about', About::class)->name('about');
 Route::get('/service', Service::class)->name('service');
@@ -29,6 +34,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/booking', Booking::class)->name('booking');
     });
 });
+
 
 
 require __DIR__ . '/auth.php';
