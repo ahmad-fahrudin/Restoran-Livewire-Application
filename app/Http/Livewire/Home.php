@@ -15,6 +15,7 @@ class Home extends Component
         $launchFoods = Category::where('name', 'Launch')->first()->foods()->take(4)->orderBy('id', 'desc')->get();
         $dinnerFoods = Category::where('name', 'Dinner')->first()->foods()->take(4)->orderBy('id', 'desc')->get();
         $reviews = Review::select()->take(4)->orderBy('id', 'desc')->get();
+
         return view('livewire.home', compact('breakfastFoods', 'launchFoods', 'dinnerFoods', 'reviews'));
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\About;
 use App\Http\Livewire\Admin\Booking\Booking;
 use App\Http\Livewire\Admin\Category\AllCategory;
 use App\Http\Livewire\Admin\Login;
@@ -8,8 +9,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Admin\Dashboard;
 use App\Http\Livewire\Admin\Foods\AllFoods;
 use App\Http\Livewire\Admin\Order\Order;
+use App\Http\Livewire\Contact;
+use App\Http\Livewire\Service;
 
 Route::get('/', Home::class)->name('home');
+Route::get('/about', About::class)->name('about');
+Route::get('/service', Service::class)->name('service');
+Route::get('/contact', Contact::class)->name('contact');
+
 
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/login', Login::class)->name('admin.login');
@@ -23,15 +30,5 @@ Route::group(['prefix' => 'admin'], function () {
     });
 });
 
-
-
-
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
-
-Route::view('profile', 'profile')
-    ->middleware(['auth'])
-    ->name('profile');
 
 require __DIR__ . '/auth.php';
