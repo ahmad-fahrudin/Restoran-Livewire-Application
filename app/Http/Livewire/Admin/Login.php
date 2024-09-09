@@ -21,8 +21,7 @@ class Login extends Component
         $this->validate();
 
         if (Auth::guard('admin')->attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
-            // Redirect to admin dashboard or any protected route
-            toast('Login Successfully', 'success')->timerProgressBar();
+
             return redirect()->route('admin.dashboard');
         } else {
             session()->flash('error', 'Ada yang salah dengan data yan di inputkan');

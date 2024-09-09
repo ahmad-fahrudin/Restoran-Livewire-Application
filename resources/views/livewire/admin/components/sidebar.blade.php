@@ -63,7 +63,18 @@
                                 <span>Foods</span>
                             </a>
                         </li>
-
+                        <li class="sidebar-item {{ Route::is('order') ? 'active' : '' }}">
+                            <a href="{{ route('order') }}" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Orderan</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item {{ Route::is('booking') ? 'active' : '' }}">
+                            <a href="{{ route('booking') }}" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Booking</span>
+                            </a>
+                        </li>
                         <button wire:click="logout" class="btn btn-danger ms-3 px-5 mt-2"
                             onclick="return confirm('Anda yakin keluar dari aplikasi?')">
                             Logout
