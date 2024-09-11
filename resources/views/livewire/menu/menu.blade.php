@@ -65,13 +65,15 @@
                                                     Rp{{ number_format($food->price, 0, ',', '.') }}</span>
                                             </h5>
                                             <small class="fst-italic">{{ substr($food->description, 0, 70) }}</small>
-                                            <a type="button" href=""
-                                                class="btn
-                                                btn-primary py-2 top-0 end-0 mt-2 me-2">view</a>
+                                            <a type="button" href="{{ route('food.details', $food->id) }}"
+                                                class="btn btn-primary py-2 top-0 end-0 mt-2 me-2">view</a>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
+
+
+
                         </div>
                     </div>
                     <div id="tab-2" class="tab-pane fade show p-0">
@@ -89,7 +91,7 @@
                                             </h5>
                                             <small
                                                 class="fst-italic">{{ substr($launchFood->description, 0, 70) }}</small>
-                                            <a type="button" href=""
+                                            <a type="button" href="{{ route('food.details', $launchFood->id) }}"
                                                 class="btn btn-primary py-2 top-0 end-0 mt-2 me-2">view</a>
 
                                         </div>
@@ -113,12 +115,14 @@
                                             </h5>
                                             <small
                                                 class="fst-italic">{{ substr($dinnerFood->description, 0, 70) }}</small>
-                                            <a type="button" href=""
+                                            <a type="button" href="{{ route('food.details', $dinnerFood->id) }}"
                                                 class="btn btn-primary py-2 top-0 end-0 mt-2 me-2">view</a>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
+
+
                         </div>
                     </div>
                 </div>

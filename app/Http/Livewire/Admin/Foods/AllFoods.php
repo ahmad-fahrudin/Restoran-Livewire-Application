@@ -31,7 +31,18 @@ class AllFoods extends Component
     }
     public function show_create_form()
     {
+        $this->resetForm();
         $this->_page = "create";
+    }
+    public function resetForm()
+    {
+        $this->name = null;
+        $this->category_id = null;
+        $this->price = null;
+        $this->description = null;
+        $this->image = null;
+        $this->stock = null;
+        $this->edit_foods_id = null;
     }
     public function show_edit_form($id)
     {
@@ -44,6 +55,7 @@ class AllFoods extends Component
         $this->description = $item->description;
         $this->image = $item->image;
     }
+
     public function add_foods()
     {
         // Jika ada edit_foods_id maka update
@@ -86,6 +98,7 @@ class AllFoods extends Component
             $food->save();
 
             session()->flash('message', 'Food updated successfully.');
+            $this->resetForm(); // Reset form setelah update
             $this->_page = "index";
         } else {
             // Jika tidak ada edit_foods_id maka lakukan create seperti biasa
@@ -120,6 +133,7 @@ class AllFoods extends Component
             ]);
 
             session()->flash('message', 'Data berhasil disimpan!');
+            $this->resetForm(); // Reset form setelah create
             $this->_page = "index";
         }
     }

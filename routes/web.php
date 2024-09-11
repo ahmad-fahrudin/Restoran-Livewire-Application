@@ -13,6 +13,7 @@ use App\Http\Livewire\Admin\Foods\AllFoods;
 use App\Http\Livewire\Admin\Booking\Booking;
 use App\Http\Livewire\Admin\Category\AllCategory;
 use App\Http\Livewire\Booking\PayBooking;
+use App\Http\Livewire\Menu\FoodDetails;
 use App\Http\Livewire\Menu\Menu;
 
 Auth::routes();
@@ -20,8 +21,10 @@ Auth::routes();
 Route::get('/', Home::class)->name('home');
 Route::get('/about', About::class)->name('about');
 Route::get('/service', Service::class)->name('service');
-Route::get('/menu', Menu::class)->name('menu');
 Route::get('/contact', Contact::class)->name('contact');
+
+Route::get('/menu', Menu::class)->name('menu');
+Route::get('/food-details/{id}', FoodDetails::class)->name('food.details');
 
 
 Route::get('/booking/pay/{id}', PayBooking::class)->name('pay.booking');
