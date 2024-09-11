@@ -36,7 +36,7 @@ class BookingForm extends Component
             'phone' => $this->phone,
             'jumlah_orang' => $this->jumlah_orang,
             'notes' => $this->notes,
-            'status' => 'pending',
+            'status' => 'Pending',
         ]);
 
         // Konfigurasi Midtrans

@@ -191,9 +191,6 @@
                                     </div>
                                 </div>
                             @endforeach
-
-
-
                         </div>
                     </div>
                     <div id="tab-2" class="tab-pane fade show p-0">
@@ -219,13 +216,10 @@
                                     </div>
                                 </div>
                             @endforeach
-
-
                         </div>
                     </div>
                     <div id="tab-3" class="tab-pane fade show p-0">
                         <div class="row g-4">
-
                             @foreach ($dinnerFoods as $dinnerFood)
                                 <div class="col-lg-6">
                                     <div class="d-flex align-items-center">
@@ -246,8 +240,6 @@
                                     </div>
                                 </div>
                             @endforeach
-
-
                         </div>
                     </div>
                 </div>

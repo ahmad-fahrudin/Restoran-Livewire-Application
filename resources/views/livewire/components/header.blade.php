@@ -12,7 +12,7 @@
                         <a href="{{ route('home') }}" class="nav-item nav-link ">Home</a>
                         <a href="{{ route('about') }}" class="nav-item nav-link ">About</a>
                         <a href="{{ route('service') }}" class="nav-item nav-link">Service</a>
-                        <a href="" class="nav-item nav-link">Menu</a>
+                        <a href="{{ route('menu') }}" class="nav-item nav-link">Menu</a>
                         <a href="{{ route('contact') }}" class="nav-item nav-link">Contact</a>
                         <ul class="navbar-nav ms-auto">
                             @guest

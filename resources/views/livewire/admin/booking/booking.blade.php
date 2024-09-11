@@ -18,18 +18,28 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                                use Carbon\Carbon;
+                            @endphp
                             @foreach ($booking as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->name }}</td>
-                                    <td>{{ $item->date }}</td>
+                                    <td>{{ Carbon::parse($item->date)->locale('id')->translatedFormat('l, d F Y h:i A') }}
+                                    </td>
                                     <td>{{ $item->jumlah_orang }}</td>
-                                    <td>{{ $item->status }}</td>
+                                    <td>
+                                        @if ($item->status == 'Bayar Berhasil')
+                                            <button class="btn btn-success">{{ $item->status }}</button>
+                                        @else
+                                            <button class="btn btn-secondary">{{ $item->status }}</button>
+                                        @endif
+                                    </td>
                                     <td>
                                         <a wire:click="delete({{ $item->id }})"
                                             onclick="return confirm('Anda yakin Menghapus data?')"
                                             class="btn
-                                            btn-danger text-center">delete</a>
+                                            btn-danger text-center">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach
