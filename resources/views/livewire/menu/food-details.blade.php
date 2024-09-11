@@ -11,8 +11,8 @@
         </div>
     </div>
     <div class="container">
-        @if (Session::has('success'))
-            <p class="alert {{ Session::get('alert-class', 'alert-success') }}">{{ Session::get('success') }}</p>
+        @if (session()->has('success'))
+            <p class="alert alert-success">{{ session('success') }}</p>
         @endif
     </div>
 
@@ -42,8 +42,7 @@
 
                     </div>
                     @auth
-                        <form method="POST" action="">
-                            @csrf
+                        <form>
                             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                             <input type="hidden" name="foods_id" value="{{ $foodItem->id }}">
                             <input type="hidden" name="name" value="{{ $foodItem->name }}">
@@ -53,17 +52,17 @@
                                 @if ($cartVerifing > 0 || $submit)
                                     <button class="btn btn-primary py-3 px-5 mt-2" disabled>Added to Cart</button>
                                 @else
-                                    <button wire:click="addToCart" class="btn btn-primary py-3 px-5 mt-2">Add to
+                                    <button wire:click.prevent="addToCart" class="btn btn-primary py-3 px-5 mt-2">Add to
                                         Cart</button>
                                 @endif
                             </div>
                         </form>
                     @else
-                        <p class="alert alert-success">login to add this product to cart</p>
-                        @endif
+                        <p class="alert alert-success">Login to add this product to cart</p>
+                    @endauth
 
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>

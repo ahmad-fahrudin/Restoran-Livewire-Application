@@ -23,8 +23,11 @@
                                     <a href="{{ route('register') }}" class="nav-item nav-link">Register</a>
                                 @endif
                             @else
-                                <a href="" class="nav-item nav-link"><i
-                                        class="fa-sharp fa-solid fa-cart-shopping"></i>Cart</a>
+                                @php
+                                    $cartCount = App\Models\Cart::count();
+                                @endphp
+                                <a href="{{ route('cart') }}" class="nav-item nav-link">Cart<span class="badge bg-primary"
+                                        style="position: relative; top: -5px; right: -5px;">{{ $cartCount }}</span></a>
 
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
