@@ -40,10 +40,10 @@ class BookingForm extends Component
         ]);
 
         // Konfigurasi Midtrans
-        \Midtrans\Config::$serverKey = config('midtrans.serverKey');
-        \Midtrans\Config::$isProduction = false;
-        \Midtrans\Config::$isSanitized = true;
-        \Midtrans\Config::$is3ds = true;
+        \Midtrans\Config::$serverKey = config('services.midtrans.serverKey');
+        \Midtrans\Config::$isProduction = config('services.midtrans.isProduction');
+        \Midtrans\Config::$isSanitized = config('services.midtrans.isSanitized');
+        \Midtrans\Config::$is3ds = config('services.midtrans.is3ds');
 
         // Set parameter untuk pembayaran Midtrans
         $params = array(

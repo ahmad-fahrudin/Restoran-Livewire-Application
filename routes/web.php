@@ -22,7 +22,7 @@ Route::get('/service', Service::class)->name('service');
 Route::get('/contact', Contact::class)->name('contact');
 
 
-Route::get('/pay-booking/{id}', PayBooking::class)->name('pay.booking');
+Route::get('/booking/pay/{id}', PayBooking::class)->name('pay.booking');
 
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/login', Login::class)->name('admin.login');
