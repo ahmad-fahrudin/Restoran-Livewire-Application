@@ -12,16 +12,17 @@ use App\Http\Livewire\Admin\Order\Order;
 use App\Http\Livewire\Admin\Foods\AllFoods;
 use App\Http\Livewire\Admin\Booking\Booking;
 use App\Http\Livewire\Admin\Category\AllCategory;
-
+use App\Http\Livewire\Booking\PayBooking;
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', Home::class)->name('home');
 Route::get('/about', About::class)->name('about');
 Route::get('/service', Service::class)->name('service');
 Route::get('/contact', Contact::class)->name('contact');
 
+
+Route::get('/pay-booking/{id}', PayBooking::class)->name('pay.booking');
 
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/login', Login::class)->name('admin.login');

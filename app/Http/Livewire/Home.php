@@ -4,8 +4,10 @@ namespace App\Http\Livewire;
 
 use App\Models\Foods;
 use App\Models\Review;
+use App\Models\Booking;
 use Livewire\Component;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 
 class Home extends Component
 {

@@ -29,7 +29,7 @@
             @livewire('admin.components.footer')
         </div>
     </div>
-
+    @include('sweetalert::alert')
     @livewireScripts
     @if (session()->has('message'))
         <script>

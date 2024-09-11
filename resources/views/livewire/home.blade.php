@@ -175,9 +175,8 @@
                             @foreach ($breakfastFoods as $food)
                                 <div class="col-lg-6">
                                     <div class="d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded"
-                                            src="{{ asset('assets/img/' . $food->image . '') }}" alt=""
-                                            style="width: 80px;">
+                                        <img class="flex-shrink-0 img-fluid rounded" src="{{ asset($food->image) }}"
+                                            alt="" style="width: 80px;">
                                         <div class="w-100 d-flex flex-column text-start ps-4">
                                             <h5 class="d-flex justify-content-between border-bottom pb-2">
                                                 <span>{{ $food->name }}</span>
@@ -203,7 +202,7 @@
                                 <div class="col-lg-6">
                                     <div class="d-flex align-items-center">
                                         <img class="flex-shrink-0 img-fluid rounded"
-                                            src="{{ asset('assets/img/' . $launchFood->image . '') }}" alt=""
+                                            src="{{ asset($launchFood->image) }}" alt=""
                                             style="width: 80px;">
                                         <div class="w-100 d-flex flex-column text-start ps-4">
                                             <h5 class="d-flex justify-content-between border-bottom pb-2">
@@ -231,7 +230,7 @@
                                 <div class="col-lg-6">
                                     <div class="d-flex align-items-center">
                                         <img class="flex-shrink-0 img-fluid rounded"
-                                            src="{{ asset('assets/img/' . $dinnerFood->image . '') }}" alt=""
+                                            src="{{ asset($dinnerFood->image) }}" alt=""
                                             style="width: 80px;">
                                         <div class="w-100 d-flex flex-column text-start ps-4">
                                             <h5 class="d-flex justify-content-between border-bottom pb-2">
@@ -284,219 +283,145 @@
                 <div class="p-5 wow fadeInUp" data-wow-delay="0.2s">
                     <h5 class="section-title ff-secondary text-start text-primary fw-normal">Reservation</h5>
                     <h1 class="text-white mb-4">Book A Table Online</h1>
-                    <form method="POST" action="">
-                        @csrf
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input name="name" type="text" class="form-control" id="name"
-                                        placeholder="Your Name">
-                                    @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                    <label for="name">Your Name</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input name="email" type="email" class="form-control" id="email"
-                                        placeholder="Your Email">
-                                    @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                    <label for="email">Your Email</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating date" id="date3" data-target-input="nearest">
-                                    <input type="text" name="date" class="form-control datetimepicker-input"
-                                        id="datetime" placeholder="Date & Time" data-target="#date3"
-                                        data-toggle="datetimepicker" />
-                                    @error('date')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                    <label for="datetime">Date & Time</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <select name="num_people" class="form-select" id="select1">
-                                        <option value="1">People 1</option>
-                                        <option value="2">People 2</option>
-                                        <option value="3">People 3</option>
-                                        <option value="3">People 4</option>
-                                        <option value="3">People 5</option>
-                                        <option value="3">People 10</option>
-                                        <option value="3">People 15</option>
-                                        <option value="3">People 20</option>
-                                    </select>
-                                    @error('num_people')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                    <label for="select1">No Of People</label>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-floating">
-                                    <textarea name="spe_request" class="form-control" placeholder="Special Request" id="message"
-                                        style="height: 100px"></textarea>
-
-                                    <label for="message">Special Request</label>
-                                </div>
-                                @error('spe_request')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="col-12">
-                                <button class="btn btn-primary w-100 py-3" name="submit" type="submit">Book
-                                    Now</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </section>
-        </div>
-    </div>
-
-    <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content rounded-0">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Youtube Video</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- 16:9 aspect ratio -->
-                    <div class="ratio ratio-16x9">
-                        <iframe class="embed-responsive-item" src="" id="video" allowfullscreen
-                            allowscriptaccess="always" allow="autoplay"></iframe>
+                    <hr>
+                    @auth
+                        @livewire('booking.booking-form')
+                    @else
+                        <p class="alert alert-success">Login to Booking a Table</p>
+                        @endif
                     </div>
-                </div>
+                </section>
             </div>
         </div>
-    </div>
-    <!-- Reservation Start -->
 
-
-    <!-- Team Start -->
-    <div class="container-xxl pt-5 pb-3">
-        <div class="container">
-            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                <h5 class="section-title ff-secondary text-center text-primary fw-normal">Team Members</h5>
-                <h1 class="mb-5">Our Master Chefs</h1>
-            </div>
-            <div class="row g-4">
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="team-item text-center rounded overflow-hidden">
-                        <div class="rounded-circle overflow-hidden m-4">
-                            <img class="img-fluid" src="{{ asset('assets/img/team-1.jpg') }}" alt="">
-                        </div>
-                        <h5 class="mb-0">Michael</h5>
-                        <small>Chef</small>
-                        <div class="d-flex justify-content-center mt-3">
-                            <a class="btn btn-square btn-primary mx-1" href=""><i
-                                    class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" href=""><i
-                                    class="fab fa-twitter"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" href=""><i
-                                    class="fab fa-instagram"></i></a>
-                        </div>
+        <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content rounded-0">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Youtube Video</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="team-item text-center rounded overflow-hidden">
-                        <div class="rounded-circle overflow-hidden m-4">
-                            <img class="img-fluid" src="{{ asset('assets/img/team-2.jpg') }}" alt="">
-                        </div>
-                        <h5 class="mb-0">Jack</h5>
-                        <small>Chef</small>
-                        <div class="d-flex justify-content-center mt-3">
-                            <a class="btn btn-square btn-primary mx-1" href=""><i
-                                    class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" href=""><i
-                                    class="fab fa-twitter"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" href=""><i
-                                    class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="team-item text-center rounded overflow-hidden">
-                        <div class="rounded-circle overflow-hidden m-4">
-                            <img class="img-fluid" src="{{ asset('assets/img/team-3.jpg') }}" alt="">
-                        </div>
-                        <h5 class="mb-0">John</h5>
-                        <small>Chef</small>
-                        <div class="d-flex justify-content-center mt-3">
-                            <a class="btn btn-square btn-primary mx-1" href=""><i
-                                    class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" href=""><i
-                                    class="fab fa-twitter"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" href=""><i
-                                    class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <div class="team-item text-center rounded overflow-hidden">
-                        <div class="rounded-circle overflow-hidden m-4">
-                            <img class="img-fluid" src="{{ asset('assets/img/team-4.jpg') }}" alt="">
-                        </div>
-                        <h5 class="mb-0">Neo</h5>
-                        <small>Chef</small>
-                        <div class="d-flex justify-content-center mt-3">
-                            <a class="btn btn-square btn-primary mx-1" href=""><i
-                                    class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" href=""><i
-                                    class="fab fa-twitter"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" href=""><i
-                                    class="fab fa-instagram"></i></a>
+                    <div class="modal-body">
+                        <!-- 16:9 aspect ratio -->
+                        <div class="ratio ratio-16x9">
+                            <iframe class="embed-responsive-item" src="" id="video" allowfullscreen
+                                allowscriptaccess="always" allow="autoplay"></iframe>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Team End -->
+        <!-- Reservation Start -->
 
 
-    <!-- Testimonial Start -->
-    <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
-        <div class="container">
-            <div class="text-center">
-                <h5 class="section-title ff-secondary text-center text-primary fw-normal">Testimonial</h5>
-                <h1 class="mb-5">Our Clients Say!!!</h1>
-            </div>
-            <div class="owl-carousel testimonial-carousel">
-                @foreach ($reviews as $review)
-                    <div class="testimonial-item bg-transparent border rounded p-4">
-                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                        <p>
-                            {{ $review->review }}
-                        </p>
-                        <div class="d-flex align-items-center">
-                            {{-- <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-1.jpg" style="width: 50px; height: 50px;"> --}}
-                            <div class="ps-3">
-                                <h5 class="mb-1">{{ $review->name }}</h5>
-                                {{-- <small>Profession</small> --}}
+        <!-- Team Start -->
+        <div class="container-xxl pt-5 pb-3">
+            <div class="container">
+                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                    <h5 class="section-title ff-secondary text-center text-primary fw-normal">Team Members</h5>
+                    <h1 class="mb-5">Our Master Chefs</h1>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="team-item text-center rounded overflow-hidden">
+                            <div class="rounded-circle overflow-hidden m-4">
+                                <img class="img-fluid" src="{{ asset('assets/img/team-1.jpg') }}" alt="">
+                            </div>
+                            <h5 class="mb-0">Michael</h5>
+                            <small>Chef</small>
+                            <div class="d-flex justify-content-center mt-3">
+                                <a class="btn btn-square btn-primary mx-1" href=""><i
+                                        class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-square btn-primary mx-1" href=""><i
+                                        class="fab fa-twitter"></i></a>
+                                <a class="btn btn-square btn-primary mx-1" href=""><i
+                                        class="fab fa-instagram"></i></a>
                             </div>
                         </div>
                     </div>
-                @endforeach
+                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="team-item text-center rounded overflow-hidden">
+                            <div class="rounded-circle overflow-hidden m-4">
+                                <img class="img-fluid" src="{{ asset('assets/img/team-2.jpg') }}" alt="">
+                            </div>
+                            <h5 class="mb-0">Jack</h5>
+                            <small>Chef</small>
+                            <div class="d-flex justify-content-center mt-3">
+                                <a class="btn btn-square btn-primary mx-1" href=""><i
+                                        class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-square btn-primary mx-1" href=""><i
+                                        class="fab fa-twitter"></i></a>
+                                <a class="btn btn-square btn-primary mx-1" href=""><i
+                                        class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="team-item text-center rounded overflow-hidden">
+                            <div class="rounded-circle overflow-hidden m-4">
+                                <img class="img-fluid" src="{{ asset('assets/img/team-3.jpg') }}" alt="">
+                            </div>
+                            <h5 class="mb-0">John</h5>
+                            <small>Chef</small>
+                            <div class="d-flex justify-content-center mt-3">
+                                <a class="btn btn-square btn-primary mx-1" href=""><i
+                                        class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-square btn-primary mx-1" href=""><i
+                                        class="fab fa-twitter"></i></a>
+                                <a class="btn btn-square btn-primary mx-1" href=""><i
+                                        class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                        <div class="team-item text-center rounded overflow-hidden">
+                            <div class="rounded-circle overflow-hidden m-4">
+                                <img class="img-fluid" src="{{ asset('assets/img/team-4.jpg') }}" alt="">
+                            </div>
+                            <h5 class="mb-0">Neo</h5>
+                            <small>Chef</small>
+                            <div class="d-flex justify-content-center mt-3">
+                                <a class="btn btn-square btn-primary mx-1" href=""><i
+                                        class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-square btn-primary mx-1" href=""><i
+                                        class="fab fa-twitter"></i></a>
+                                <a class="btn btn-square btn-primary mx-1" href=""><i
+                                        class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Team End -->
 
 
+        <!-- Testimonial Start -->
+        <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="container">
+                <div class="text-center">
+                    <h5 class="section-title ff-secondary text-center text-primary fw-normal">Testimonial</h5>
+                    <h1 class="mb-5">Our Clients Say!!!</h1>
+                </div>
+                <div class="owl-carousel testimonial-carousel">
+                    @foreach ($reviews as $review)
+                        <div class="testimonial-item bg-transparent border rounded p-4">
+                            <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+                            <p>
+                                {{ $review->review }}
+                            </p>
+                            <div class="d-flex align-items-center">
+                                {{-- <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-1.jpg" style="width: 50px; height: 50px;"> --}}
+                                <div class="ps-3">
+                                    <h5 class="mb-1">{{ $review->name }}</h5>
+                                    {{-- <small>Profession</small> --}}
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+
+
+                </div>
             </div>
         </div>
     </div>
-</div>

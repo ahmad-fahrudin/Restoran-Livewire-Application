@@ -18,6 +18,7 @@
                             <tr>
                                 <th style="width: 50px">No.</th>
                                 <th>Image</th>
+                                <th>Category</th>
                                 <th>Name</th>
                                 <th>Price</th>
                                 <th style="width: 300px">Opsi</th>
@@ -30,6 +31,7 @@
                                     <td><img src="{{ asset($item->image) }}" alt=""
                                             style="width: 50px; height:50px;">
                                     </td>
+                                    <td>{{ $item->category->name }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>Rp.{{ number_format($item->price, 0, ',', '.') }}</td>
                                     <td>

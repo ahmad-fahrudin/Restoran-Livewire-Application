@@ -20,6 +20,8 @@
     <script src="{{ asset('assets/static/js/initTheme.js') }}"></script>
     {{ $slot }}
     @livewireScripts
+    @include('sweetalert::alert')
+
 </body>
 
 </html>
