@@ -13,7 +13,11 @@ class Cart extends Component
 
     public function mount()
     {
-        // Memeriksa apakah user sudah login
+        $this->loadCart();
+    }
+
+    public function loadCart()
+    {
         if (auth()->check()) {
             // Mendapatkan item di keranjang
             $this->cartItems = CartModel::where('user_id', Auth::user()->id)->get();
@@ -22,6 +26,21 @@ class Cart extends Component
         } else {
             abort(404); // Jika user tidak login, lempar 404
         }
+    }
+
+    public function deleteItem($itemId)
+    {
+        // Menghapus item dari keranjang
+        $cartItem = CartModel::where('user_id', Auth::user()->id)->where('id', $itemId)->first();
+
+        if ($cartItem) {
+            $cartItem->delete();
+            // Set session flash message
+            session()->flash('message', 'Item berhasil dihapus dari keranjang!');
+        }
+
+        // Reload cart items and price
+        $this->loadCart();
     }
 
     public function render()

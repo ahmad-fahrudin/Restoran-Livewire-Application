@@ -12,13 +12,14 @@
     </div>
 
     <div class="container">
-        @if (Session::has('delete'))
-            <p class="alert {{ Session::get('alert-class', 'alert-success') }}">{{ Session::get('delete') }}</p>
+        @if (session()->has('message'))
+            <div class="alert alert-success">
+                {{ session('message') }}
+            </div>
         @endif
     </div>
 
     <div class="container">
-
         <div class="col-md-12">
             <table class="table">
                 <thead>
@@ -35,21 +36,27 @@
                         @foreach ($cartItems as $food)
                             <tr>
                                 <th>{{ $loop->iteration }}</th>
-                                <th><img width="60" height="60" src="{{ asset($food->image) }}">
-                                </th>
+                                <th><img width="60" height="60" src="{{ asset($food->image) }}"></th>
                                 <td>{{ $food->name }}</td>
                                 <td>Rp{{ number_format($food->price, 0, ',', '.') }}</td>
-                                <td><a href="" class="btn btn-danger text-white">delete</td>
+                                <td>
+                                    <button class="btn btn-danger text-white"
+                                        wire:click="deleteItem({{ $food->id }})">
+                                        Delete
+                                    </button>
+                                </td>
                             </tr>
                         @endforeach
                     @else
-                        <h3 class="alert alert-success">you have no items in cart yet</p>
+                        <tr>
+                            <td colspan="5">
+                                <h3 class="alert alert-success">Kamu belom menambahkan ke Cart</h3>
+                            </td>
+                        </tr>
                     @endif
-
-
-
                 </tbody>
             </table>
+
             <div class="position-relative mx-auto" style="max-width: 400px; padding-left: 679px;">
                 <p style="margin-left: -7px;" class="w-19 py-3 ps-4 pe-5" type="text">
                     Rp{{ number_format($price, 0, ',', '.') }}</p>
