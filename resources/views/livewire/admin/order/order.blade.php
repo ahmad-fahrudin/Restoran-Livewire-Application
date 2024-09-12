@@ -21,9 +21,16 @@
                             @foreach ($checkout as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->name }}</td>
                                     <td>{{ $item->phone }}</td>
-                                    <td>{{ $item->email }}</td>
                                     <td>Rp.{{ number_format($item->price, 0, ',', '.') }}</td>
+                                    <td>
+                                        @if ($item->status == 'Bayar Berhasil')
+                                            <button class="btn btn-success">{{ $item->status }}</button>
+                                        @else
+                                            <button class="btn btn-secondary">{{ $item->status }}</button>
+                                        @endif
+                                    </td>
                                     <td>
                                         <a wire:click="delete({{ $item->id }})"
                                             onclick="return confirm('Anda yakin Menghapus data?')"

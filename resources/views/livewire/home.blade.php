@@ -307,7 +307,7 @@
 
 
         <!-- Team Start -->
-        <div class="container-xxl pt-5 pb-3">
+        {{-- <div class="container-xxl pt-5 pb-3">
             <div class="container">
                 <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                     <h5 class="section-title ff-secondary text-center text-primary fw-normal">Team Members</h5>
@@ -384,7 +384,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- Team End -->
 
 

@@ -66,8 +66,7 @@
                         cart
                     </p>
                 @else
-                    <form method="POST" action="">
-                        @csrf
+                    <form wire:click.prevent="prepareCheckout">
                         <input type="hidden" value="{{ $price }}" name="price">
                         <button type="submit" name="submit"
                             class="btn btn-primary py-2 top-0 end-0 mt-2 me-2">Checkout</button>

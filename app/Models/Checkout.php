@@ -11,10 +11,6 @@ class Checkout extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    public function foods()
-    {
-        return $this->belongsTo(Foods::class);
-    }
     public function user()
     {
         return $this->belongsTo(User::class);
