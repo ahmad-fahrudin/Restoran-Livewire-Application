@@ -37,11 +37,11 @@
 
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 
-                                        <a class="dropdown-item" href="">
+                                        <a class="dropdown-item" href="{{ route('user.booking') }}">
                                             My Bookings
                                         </a>
 
-                                        <a class="dropdown-item" href="">
+                                        <a class="dropdown-item" href="{{ route('user.order') }}">
                                             My Orders
                                         </a>
                                         <a class="dropdown-item" href="{{ route('logout') }}"

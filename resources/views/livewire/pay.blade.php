@@ -30,6 +30,8 @@
                 onSuccess: function(result) {
                     /* You may add your own js here, this is just example */
                     document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                    // Redirect to success page after payment success
+                    window.livewire.emit('paymentSuccess');
                 },
                 // Optional
                 onPending: function(result) {

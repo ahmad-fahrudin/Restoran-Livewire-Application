@@ -18,6 +18,8 @@ use App\Http\Livewire\Admin\Foods\AllFoods;
 use App\Http\Livewire\Admin\Booking\Booking;
 use App\Http\Livewire\Admin\Category\AllCategory;
 use App\Http\Livewire\Pay;
+use App\Http\Livewire\User\Booking as UserBooking;
+use App\Http\Livewire\User\Order as UserOrder;
 
 Auth::routes();
 
@@ -34,6 +36,12 @@ Route::get('/menu', Menu::class)->name('menu');
 Route::get('/food-details/{id}', FoodDetails::class)->name('food.details');
 
 Route::get('/booking/pay/{id}', PayBooking::class)->name('pay.booking');
+
+Route::group(["prefix" => "users"], function () {
+    Route::get('/booking', UserBooking::class)->name('user.booking');
+    Route::get('/order', UserOrder::class)->name('user.order');
+});
+
 
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/login', Login::class)->name('admin.login');
