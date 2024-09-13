@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Cart;
 
 use App\Models\Checkout;
 use Livewire\Component;
@@ -16,7 +16,7 @@ class Pay extends Component
 
     public function render()
     {
-        return view('livewire.pay', [
+        return view('livewire.cart.pay', [
             'snapToken' => $this->snapToken,
         ]);
     }

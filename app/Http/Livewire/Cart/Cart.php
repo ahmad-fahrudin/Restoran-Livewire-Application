@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Cart;
 
 use Livewire\Component;
 use App\Models\Cart as CartModel;
@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 
 class Cart extends Component
 {
+
     public $cartItems = [];
     public $price = 0;
 
@@ -55,12 +56,14 @@ class Cart extends Component
         // Reload cart items and price
         $this->loadCart();
     }
-
     public function render()
     {
-        return view('livewire.cart', [
-            'cartItems' => $this->cartItems,
-            'price' => $this->price,
-        ]);
+        return view(
+            'livewire.cart.cart',
+            [
+                'cartItems' => $this->cartItems,
+                'price' => $this->price,
+            ]
+        );
     }
 }

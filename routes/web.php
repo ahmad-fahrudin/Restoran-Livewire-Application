@@ -2,12 +2,11 @@
 
 
 use App\Http\Livewire\Pay;
-use App\Http\Livewire\Cart;
 use App\Http\Livewire\Home;
 use App\Http\Livewire\About;
 use App\Http\Livewire\Contact;
 use App\Http\Livewire\Service;
-use App\Http\Livewire\Checkout;
+use App\Http\Livewire\Success;
 use App\Http\Livewire\Menu\Menu;
 use App\Http\Livewire\Admin\Login;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +19,10 @@ use App\Http\Livewire\Admin\Foods\AllFoods;
 use App\Http\Livewire\Admin\Booking\Booking;
 use App\Http\Livewire\User\Order as UserOrder;
 use App\Http\Livewire\Admin\Category\AllCategory;
+use App\Http\Livewire\Cart\Cart;
+use App\Http\Livewire\Cart\Checkout as CartCheckout;
+use App\Http\Livewire\Cart\Pay as CartPay;
+use App\Http\Livewire\Cart\Success as CartSuccess;
 use App\Http\Livewire\User\Booking as UserBooking;
 
 Auth::routes();
@@ -30,9 +33,9 @@ Route::get('/service', Service::class)->name('service');
 Route::get('/contact', Contact::class)->name('contact');
 Route::get('/cart', Cart::class)->name('cart');
 
-Route::get('/checkout', Checkout::class)->name('checkout');
-Route::get('/pay/{id}', Pay::class)->name('pay');
-Route::get('/pay/success', Pay::class)->name('pay.success');
+Route::get('/checkout', CartCheckout::class)->name('checkout');
+Route::get('/pay/{id}', CartPay::class)->name('pay');
+Route::get('/pay/success', CartSuccess::class)->name('pay.success');
 
 Route::get('/menu', Menu::class)->name('menu');
 Route::get('/food-details/{id}', FoodDetails::class)->name('food.details');
