@@ -1,5 +1,7 @@
 <?php
 
+
+use App\Http\Livewire\Pay;
 use App\Http\Livewire\Cart;
 use App\Http\Livewire\Home;
 use App\Http\Livewire\About;
@@ -16,10 +18,9 @@ use App\Http\Livewire\Admin\Order\Order;
 use App\Http\Livewire\Booking\PayBooking;
 use App\Http\Livewire\Admin\Foods\AllFoods;
 use App\Http\Livewire\Admin\Booking\Booking;
-use App\Http\Livewire\Admin\Category\AllCategory;
-use App\Http\Livewire\Pay;
-use App\Http\Livewire\User\Booking as UserBooking;
 use App\Http\Livewire\User\Order as UserOrder;
+use App\Http\Livewire\Admin\Category\AllCategory;
+use App\Http\Livewire\User\Booking as UserBooking;
 
 Auth::routes();
 
@@ -31,11 +32,13 @@ Route::get('/cart', Cart::class)->name('cart');
 
 Route::get('/checkout', Checkout::class)->name('checkout');
 Route::get('/pay/{id}', Pay::class)->name('pay');
+Route::get('/pay/success', Pay::class)->name('pay.success');
 
 Route::get('/menu', Menu::class)->name('menu');
 Route::get('/food-details/{id}', FoodDetails::class)->name('food.details');
 
 Route::get('/booking/pay/{id}', PayBooking::class)->name('pay.booking');
+Route::get('/booking/success', PayBooking::class)->name('booking.success');
 
 Route::group(["prefix" => "users"], function () {
     Route::get('/booking', UserBooking::class)->name('user.booking');

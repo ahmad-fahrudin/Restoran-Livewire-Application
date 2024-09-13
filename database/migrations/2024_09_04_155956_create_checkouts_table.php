@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('checkouts', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnUpdate();
-            $table->foreignIdFor(Foods::class)->constrained()->cascadeOnUpdate();
             $table->string('name');
             $table->string('phone', 30);
             $table->string('snap_token')->nullable();

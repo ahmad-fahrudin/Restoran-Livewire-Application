@@ -25,7 +25,7 @@
                                     <td>{{ $item->phone }}</td>
                                     <td>Rp.{{ number_format($item->price, 0, ',', '.') }}</td>
                                     <td>
-                                        @if ($item->status == 'Bayar Berhasil')
+                                        @if ($item->status == 'Successfully')
                                             <button class="btn btn-success">{{ $item->status }}</button>
                                         @else
                                             <button class="btn btn-secondary">{{ $item->status }}</button>

@@ -18,7 +18,7 @@ class BookingForm extends Component
     protected $rules = [
         'name' => 'required|string',
         'date' => 'required|date',
-        'phone' => 'required|integer',
+        'phone' => 'required',
         'jumlah_orang' => 'required|integer',
         'notes' => 'required|string',
     ];

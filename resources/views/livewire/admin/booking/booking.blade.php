@@ -29,7 +29,7 @@
                                     </td>
                                     <td>{{ $item->jumlah_orang }}</td>
                                     <td>
-                                        @if ($item->status == 'Bayar Berhasil')
+                                        @if ($item->status == 'Successfully')
                                             <button class="btn btn-success">{{ $item->status }}</button>
                                         @else
                                             <button class="btn btn-secondary">{{ $item->status }}</button>

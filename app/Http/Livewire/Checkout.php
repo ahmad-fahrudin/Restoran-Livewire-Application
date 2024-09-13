@@ -48,7 +48,7 @@ class Checkout extends Component
             "user_id" => Auth::user()->id,
             "price" => $this->price,
             "notes" => $this->notes,
-            'status' => 'Pending Payment',
+            'status' => 'Pending',
         ]);
 
         // Konfigurasi Midtrans
