@@ -29,13 +29,8 @@
             @livewire('admin.components.footer')
         </div>
     </div>
-    @include('sweetalert::alert')
     @livewireScripts
-    @if (session()->has('message'))
-        <script>
-            toastr.success('{{ session('message') }}');
-        </script>
-    @endif
+    <x-toaster-hub />
     <script src="{{ asset('assets/static/js/components/dark.js') }}"></script>
     <script src="{{ asset('assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/compiled/js/app.js') }}"></script>
