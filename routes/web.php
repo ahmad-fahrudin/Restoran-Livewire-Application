@@ -1,31 +1,35 @@
 <?php
 
 
-use App\Http\Livewire\Cart\Checkout;
-use App\Http\Livewire\Cart\Pay;
-use App\Http\Livewire\Cart\Success;
 use App\Http\Livewire\Home;
 use App\Http\Livewire\About;
 use App\Http\Livewire\Contact;
 use App\Http\Livewire\Service;
+use App\Http\Livewire\Cart\Pay;
+use App\Http\Livewire\Cart\Cart;
 use App\Http\Livewire\Menu\Menu;
 use App\Http\Livewire\Admin\Login;
+use App\Http\Livewire\User\Review;
+use App\Http\Livewire\Cart\Success;
+use App\Http\Livewire\Cart\Checkout;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Admin\Dashboard;
 use App\Http\Livewire\Menu\FoodDetails;
 use App\Http\Livewire\Admin\Order\Order;
 use App\Http\Livewire\Booking\PayBooking;
+use App\Http\Livewire\User\BookingReview;
 use App\Http\Livewire\Admin\Foods\AllFoods;
 use App\Http\Livewire\Admin\Booking\Booking;
 use App\Http\Livewire\User\Order as UserOrder;
+use App\Http\Controllers\VerificationController;
 use App\Http\Livewire\Admin\Category\AllCategory;
-use App\Http\Livewire\Cart\Cart;
 use App\Http\Livewire\User\Booking as UserBooking;
-use App\Http\Livewire\User\BookingReview;
-use App\Http\Livewire\User\Review;
 
 Auth::routes();
+Route::get('/verify-email', [VerificationController::class, 'showVerificationForm'])->name('verify.email');
+Route::post('/verify-email', [VerificationController::class, 'verifyCode']);
+
 
 Route::get('/', Home::class)->name('home');
 Route::get('/about', About::class)->name('about');

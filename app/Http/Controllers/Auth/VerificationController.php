@@ -1,41 +1,34 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\VerifiesEmails;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class VerificationController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Email Verification Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller is responsible for handling email verification for any
-    | user that recently registered with the application. Emails may also
-    | be re-sent if the user didn't receive the original email message.
-    |
-    */
-
-    use VerifiesEmails;
-
-    /**
-     * Where to redirect users after verification.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function showVerificationForm()
     {
-        $this->middleware('auth');
-        $this->middleware('signed')->only('verify');
-        $this->middleware('throttle:6,1')->only('verify', 'resend');
+        return view('auth.verify'); // Tampilkan form untuk memasukkan kode verifikasi
+    }
+
+    public function verifyCode(Request $request)
+    {
+        $request->validate([
+            'verification_code' => 'required',
+        ]);
+
+        $user = Auth::user();
+
+        if ($user->verification_code == $request->verification_code) {
+            $user->is_verified = true;
+            $user->verification_code = null; // Hapus kode setelah diverifikasi
+            $user->save();
+
+            return redirect()->route('home')->with('success', 'Email berhasil diverifikasi!');
+        } else {
+            return back()->withErrors(['verification_code' => 'Kode verifikasi salah']);
+        }
     }
 }

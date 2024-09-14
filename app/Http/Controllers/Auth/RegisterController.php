@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Str;
+use App\Mail\VerificationEmail;
+use App\Jobs\SendVerificationEmail;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -61,12 +65,23 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
+
+
     protected function create(array $data)
     {
-        return User::create([
+        $verificationCode = rand(100000, 999999); // Generate 6-digit verification code
+
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'verification_code' => $verificationCode, // Simpan kode verifikasi
+            'is_verified' => false, // User belum diverifikasi
         ]);
+
+        // Kirim email dengan kode verifikasi
+        Mail::to($user->email)->send(new VerificationEmail($user));
+
+        return $user;
     }
 }

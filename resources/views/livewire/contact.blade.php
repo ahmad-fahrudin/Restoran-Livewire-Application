@@ -44,39 +44,66 @@
                 </div>
                 <div class="col-md-6">
                     <div class="wow fadeInUp" data-wow-delay="0.2s">
-                        <form>
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="name"
-                                            placeholder="Your Name">
-                                        <label for="name">Your Name</label>
+                        <div>
+                            <div>
+                                @if (session()->has('message'))
+                                    <div class="alert alert-success">
+                                        {{ session('message') }}
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="email" class="form-control" id="email"
-                                            placeholder="Your Email">
-                                        <label for="email">Your Email</label>
+                                @endif
+
+                                <form wire:submit.prevent="submit">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control" id="name"
+                                                    wire:model="name" placeholder="Your Name" required>
+                                                <label for="name">Your Name</label>
+                                                @error('name')
+                                                    <span class="error">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input type="email" class="form-control" id="email"
+                                                    wire:model="email" placeholder="Your Email" required>
+                                                <label for="email">Your Email</label>
+                                                @error('email')
+                                                    <span class="error">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control" id="subject"
+                                                    wire:model="subject" placeholder="Subject" required>
+                                                <label for="subject">Subject</label>
+                                                @error('subject')
+                                                    <span class="error">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <textarea class="form-control" placeholder="Leave a message here" id="message" wire:model="message"
+                                                    style="height: 150px" required></textarea>
+                                                <label for="message">Message</label>
+                                                @error('message')
+                                                    <span class="error">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <button class="btn btn-primary w-100 py-3" type="submit">Send
+                                                Message</button>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="subject" placeholder="Subject">
-                                        <label for="subject">Subject</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 150px"></textarea>
-                                        <label for="message">Message</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
-                                </div>
+                                </form>
                             </div>
-                        </form>
+
+                        </div>
+
                     </div>
                 </div>
             </div>
