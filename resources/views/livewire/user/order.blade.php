@@ -31,8 +31,8 @@
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->phone }}</td>
                             <td> Rp{{ number_format($item->price, 0, ',', '.') }}</td>
-                            @if ($item->status == 'Order Success')
-                                <td><a href="" class="btn btn-success">Review</a></td>
+                            @if ($item->status == 'Successfully')
+                                <td><a href="" class="btn btn-warning">Review</a></td>
                             @else
                                 <td>
                                     <a href="{{ route('pay', $item->id) }}" class="btn btn-success">Continue

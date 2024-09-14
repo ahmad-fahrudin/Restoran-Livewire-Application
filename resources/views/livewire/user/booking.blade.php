@@ -33,12 +33,12 @@
                             <td>{{ $item->name }}</td>
                             <td>{{ Carbon::parse($item->date)->locale('id')->translatedFormat('l, d F Y h:i A') }}
                             </td>
-                            @if ($item->status == 'Booking Success')
-                                <td><a href="" class="btn btn-success">Review</a></td>
+                            @if ($item->status == 'Successfully')
+                                <td><a href="" class="btn btn-warning">Review</a></td>
                             @else
                                 <td>
                                     <a href="{{ route('pay.booking', $item->id) }}" class="btn btn-success">Continue
-                                        Payment</a>
+                                        Pay</a>
                                 </td>
                             @endif
                         </tr>

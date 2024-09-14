@@ -10,12 +10,6 @@ class Success extends Component
 {
     public function render()
     {
-        $checkout = Checkout::where('user_id', Auth::id())->first();
-        if ($checkout && $checkout->status !== 'Successfully') {
-            $checkout->status = 'Successfully';
-            $checkout->save();
-        }
-
         return view('livewire.cart.success');
     }
 }
