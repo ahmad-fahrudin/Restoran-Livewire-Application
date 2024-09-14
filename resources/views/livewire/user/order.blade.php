@@ -32,7 +32,9 @@
                             <td>{{ $item->phone }}</td>
                             <td> Rp{{ number_format($item->price, 0, ',', '.') }}</td>
                             @if ($item->status == 'Successfully')
-                                <td><a href="" class="btn btn-warning">Review</a></td>
+                                <td><a href="{{ route('review', $item->id) }}" class="btn btn-warning">Review</a></td>
+                            @elseif ($item->status == 'Finished')
+                                <td><button class="btn btn-secondary" disabled>Finished</button></td>
                             @else
                                 <td>
                                     <a href="{{ route('pay', $item->id) }}" class="btn btn-success">Continue

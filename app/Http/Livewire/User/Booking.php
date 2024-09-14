@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 class Booking extends Component
 {
     public $allBookings;
-
     public function mount()
     {
         // Ambil semua booking berdasarkan user yang login

@@ -19,7 +19,6 @@
                 </a>
             </button>
         </div>
-
     </div>
     <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ env('MIDTRANS_CLIENT_KEY') }}"></script>
     <script type="text/javascript">

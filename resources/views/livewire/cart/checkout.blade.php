@@ -39,8 +39,8 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-floating">
-                                <textarea type="text" wire:model="notes" class="form-control" id="notes" placeholder="Notes" cols="30"
-                                    rows="10"></textarea>
+                                <textarea class="form-control" id="notes" type="text" class="form-control @error('notes') is-invalid @enderror"
+                                    wire:model="notes" name="notes" required autocomplete="notes" autofocus style="height: 150px"></textarea>
                                 <label for="notes">Notes</label>
                                 @error('notes')
                                     <span class="text-danger">{{ $message }}</span>

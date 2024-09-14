@@ -34,7 +34,10 @@
                             <td>{{ Carbon::parse($item->date)->locale('id')->translatedFormat('l, d F Y h:i A') }}
                             </td>
                             @if ($item->status == 'Successfully')
-                                <td><a href="" class="btn btn-warning">Review</a></td>
+                                <td><a href="{{ route('booking.review', $item->id) }}"
+                                        class="btn btn-warning">Review</a></td>
+                            @elseif ($item->status == 'Finished')
+                                <td><button class="btn btn-secondary" disabled>Finished</button></td>
                             @else
                                 <td>
                                     <a href="{{ route('pay.booking', $item->id) }}" class="btn btn-success">Continue

@@ -22,6 +22,8 @@ use App\Http\Livewire\User\Order as UserOrder;
 use App\Http\Livewire\Admin\Category\AllCategory;
 use App\Http\Livewire\Cart\Cart;
 use App\Http\Livewire\User\Booking as UserBooking;
+use App\Http\Livewire\User\BookingReview;
+use App\Http\Livewire\User\Review;
 
 Auth::routes();
 
@@ -43,7 +45,10 @@ Route::get('/booking/success', PayBooking::class)->name('booking.success');
 
 Route::group(["prefix" => "users"], function () {
     Route::get('/booking', UserBooking::class)->name('user.booking');
+    Route::get('/review/{id}', BookingReview::class)->name('review');
+
     Route::get('/order', UserOrder::class)->name('user.order');
+    Route::get('/review/{id}', Review::class)->name('review');
 });
 
 
