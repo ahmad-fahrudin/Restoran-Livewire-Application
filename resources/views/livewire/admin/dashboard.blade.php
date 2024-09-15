@@ -134,6 +134,15 @@
                                 <h6 class="text-muted mb-0">Operating System</h6>
                             </div>
                         </div>
+                        <div class="recent-message d-flex px-4 py-3">
+                            <div class="avatar avatar-lg">
+                                <i class="fas fa-laptop"></i>
+                            </div>
+                            <div class="name ms-4">
+                                <h5 class="mb-1">{{ $platformVersion }}</h5>
+                                <h6 class="text-muted mb-0">Operating Version</h6>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

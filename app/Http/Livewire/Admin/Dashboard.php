@@ -18,6 +18,7 @@ class Dashboard extends Component
     public $browser;
     public $browserVersion;
     public $platform;
+    public $platformVersion;
 
     public function mount()
     {
@@ -32,6 +33,7 @@ class Dashboard extends Component
         $this->browser = $agent->browser();
         $this->browserVersion = $agent->version($this->browser);
         $this->platform = $agent->platform();
+        $this->platformVersion = $agent->version($this->platform);
     }
     public function render()
     {
