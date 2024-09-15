@@ -47,31 +47,31 @@
                         <li class="sidebar-title">Menu</li>
                         <li class="sidebar-item {{ Route::is('admin.dashboard') ? 'active' : '' }}">
                             <a href="{{ route('admin.dashboard') }}" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
+                                <i class="bi bi-bar-chart-fill"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
                         <li class="sidebar-item {{ Route::is('all.category') ? 'active' : '' }}">
                             <a href="{{ route('all.category') }}" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
+                                <i class="bi bi-grid-1x2-fill"></i>
                                 <span>Category</span>
                             </a>
                         </li>
                         <li class="sidebar-item {{ Route::is('all.foods') ? 'active' : '' }}">
                             <a href="{{ route('all.foods') }}" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
+                                <i class="bi bi-image-fill"></i>
                                 <span>Foods</span>
                             </a>
                         </li>
                         <li class="sidebar-item {{ Route::is('order') ? 'active' : '' }}">
                             <a href="{{ route('order') }}" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
+                                <i class="bi bi-basket-fill"></i>
                                 <span>Orderan</span>
                             </a>
                         </li>
                         <li class="sidebar-item {{ Route::is('booking') ? 'active' : '' }}">
                             <a href="{{ route('booking') }}" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
+                                <i class="bi bi-stack"></i>
                                 <span>Booking</span>
                             </a>
                         </li>

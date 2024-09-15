@@ -25,7 +25,8 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td><button class="btn btn-warning text-center" data-bs-toggle="modal"
-                                            data-bs-target="#editCategoryModal{{ $item->id }}">Edit</button>
+                                            data-bs-target="#editCategoryModal{{ $item->id }}"><i
+                                                class="bi bi-pencil-square"></i></button>
                                         <div class="modal fade" id="editCategoryModal{{ $item->id }}" tabindex="-1"
                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-lg">
@@ -59,7 +60,7 @@
                                             </div>
                                         </div>
                                         <a href="#" onclick="return confirm('Anda yakin Menghapus data?')"
-                                            class="btn btn-danger text-center">delete</a>
+                                            class="btn btn-danger text-center"><i class="bi bi-trash"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

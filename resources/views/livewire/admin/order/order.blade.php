@@ -35,7 +35,8 @@
                                         <a wire:click="delete({{ $item->id }})"
                                             onclick="return confirm('Anda yakin Menghapus data?')"
                                             class="btn
-                                            btn-danger text-center">delete</a>
+                                            btn-danger text-center"><i
+                                                class="bi bi-trash"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

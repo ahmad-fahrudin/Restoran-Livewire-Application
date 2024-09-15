@@ -35,12 +35,13 @@
                                     <td>{{ $item->name }}</td>
                                     <td>Rp.{{ number_format($item->price, 0, ',', '.') }}</td>
                                     <td>
-                                        <a wire:click="edit({{ $item->id }})"
-                                            class="btn btn-warning text-center">edit</a>
+                                        <a wire:click="edit({{ $item->id }})" class="btn btn-warning text-center"><i
+                                                class="bi bi-pencil-square"></i></a>
                                         <a wire:click="delete({{ $item->id }})"
                                             onclick="return confirm('Anda yakin Menghapus data?')"
                                             class="btn
-                                            btn-danger text-center">delete</a>
+                                            btn-danger text-center"><i
+                                                class="bi bi-trash"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
