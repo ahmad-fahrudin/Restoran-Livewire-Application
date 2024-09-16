@@ -22,7 +22,7 @@ class Dashboard extends Component
 
     public function mount()
     {
-        // Mengambil jumlah produk, pesanan, admin, dan user
+        // Mengambil jumlah produk, pesanan, booking, dan user
         $this->foodsCount = Foods::count();
         $this->orderCount = Checkout::count();
         $this->bookingCount = Booking::count();
@@ -35,6 +35,7 @@ class Dashboard extends Component
         $this->platform = $agent->platform();
         $this->platformVersion = $agent->version($this->platform);
     }
+
     public function render()
     {
         return view('livewire.admin.dashboard')->layout('layouts.admin.app');
